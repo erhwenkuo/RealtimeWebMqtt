@@ -29,7 +29,7 @@ web_app.controller('mqtt_web_client_ctrl', function ($scope, $http, $state, Noti
     $scope.isConnected = false;
     $scope.mqtt_conn = {};
     $scope.mqtt_conn.host = app_config.mqtt_broker_url || "localhost";
-    $scope.mqtt_conn.port = app_config.mqtt_broker_port || 8000;
+    $scope.mqtt_conn.port = app_config.mqtt_broker_port || 9001;
     $scope.mqtt_conn.clientid = generateUUID();
     $scope.mqtt_conn.keep_alive = 60;
     $scope.mqtt_conn.clean_session = false;

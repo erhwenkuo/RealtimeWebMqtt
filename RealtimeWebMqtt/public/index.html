@@ -39,7 +39,7 @@
                             <li><a ui-sref="mqtt_web_client">Mqtt Web Client</a></li>
                             <li class="divider"></li>
                             <li class="dropdown-header">Web Application</li>
-                            <li><a ui-sref="demo-mqtt-whoisonline">Who is online</a></li>
+                            <li><a ui-sref="mqtt_web_whoisonline">Who is online</a></li>
                             <li><a ui-sref="demo-mqtt-inboxnotification">Inbox and notification</a></li>
                             <li><a ui-sref="demo-mqtt-jobprogress">Realtime job progress</a></li>
                             <li class="divider"></li>
@@ -54,11 +54,13 @@
             </div>
         </div>
     </nav>
+
     <!-- MAIN CONTENT-->
     <div class="container">
         <!-- This is the key content-->
         <div ui-view></div>
     </div>
+
 
     <!--FOOTER-->
     <footer class="footer">
@@ -90,5 +92,7 @@
     <script src="app.js"></script>
     <script src="services/app_config.js"></script>
     <script src="controllers/mqtt_web_client_ctrl.js"></script>
+    <script src="controllers/mqtt_web_whoisonline_ctrl.js"></script>
+
 </body>
 </html>

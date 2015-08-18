@@ -22,11 +22,11 @@ else {
     srvConfig.elasticsearch = {};
     // Redis connection info
     srvConfig.redis = {};
-    srvConfig.redis.host = 'localhost';
+    srvConfig.redis.host = '10.34.217.173';
     srvConfig.redis.port = 6379;
 
     // IoT Mqtt Connection info
-    srvConfig.mqttBrokerUrl = 'localhost';
+    srvConfig.mqttBrokerUrl = '10.34.217.173';
     srvConfig.mqttBrokerPort = 1883;
     srvConfig.mqttConnUsername = "";
     srvConfig.mqttConnPassword = "";
