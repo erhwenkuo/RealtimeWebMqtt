@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "RealtimeWebMqtt", "RealtimeWebMqtt\RealtimeWebMqtt.njsproj", "{D142CF13-B2B6-432E-ABDB-40CE202AC02B}"
 EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "RealtimeWebProxy", "RealtimeWebProxy\RealtimeWebProxy.njsproj", "{65345F89-288A-4B1B-B288-94504B1C7366}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D142CF13-B2B6-432E-ABDB-40CE202AC02B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D142CF13-B2B6-432E-ABDB-40CE202AC02B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D142CF13-B2B6-432E-ABDB-40CE202AC02B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65345F89-288A-4B1B-B288-94504B1C7366}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65345F89-288A-4B1B-B288-94504B1C7366}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65345F89-288A-4B1B-B288-94504B1C7366}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65345F89-288A-4B1B-B288-94504B1C7366}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -35,7 +35,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // use environment param to define service port or use port "80"
-var port = process.env.port || 80;
+var port = process.env.port || 1337;
 
 // Start the Node.js webserver service
 var server = app.listen(port, function () {

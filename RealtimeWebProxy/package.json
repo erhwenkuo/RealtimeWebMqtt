@@ -1,0 +1,13 @@
+{
+  "name": "RealtimeWebProxy",
+  "version": "0.0.0",
+  "description": "RealtimeWebProxy",
+  "main": "webproxy.js",
+  "author": {
+    "name": "8703147",
+    "email": ""
+  },
+  "dependencies": {
+    "http-proxy": "^1.11.1"
+  }
+}
