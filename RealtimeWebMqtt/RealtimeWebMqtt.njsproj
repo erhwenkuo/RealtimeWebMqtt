@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <Name>RealtimeWebMqtt</Name>
+    <RootNamespace>RealtimeWebMqtt</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>d142cf13-b2b6-432e-abdb-40ce202ac02b</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>server.js</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <ProjectView>ShowAllFiles</ProjectView>
+    <NodejsPort>1337</NodejsPort>
+    <StartWebBrowser>true</StartWebBrowser>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="public\app.js" />
+    <Compile Include="public\assets\js\adapters\standalone-framework.js" />
+    <Compile Include="public\assets\js\adapters\standalone-framework.src.js" />
+    <Compile Include="public\assets\js\angular-animate.min.js" />
+    <Compile Include="public\assets\js\angular-minicolors.js" />
+    <Compile Include="public\assets\js\angular-qr.min.js" />
+    <Compile Include="public\assets\js\angular-ui-notification.min.js" />
+    <Compile Include="public\assets\js\angular-ui-router.min.js" />
+    <Compile Include="public\assets\js\angular.min.js" />
+    <Compile Include="public\assets\js\AssimpJSONLoader.js" />
+    <Compile Include="public\assets\js\bootstrap.js" />
+    <Compile Include="public\assets\js\bootstrap.min.js" />
+    <Compile Include="public\assets\js\highcharts-more.js" />
+    <Compile Include="public\assets\js\highcharts-ng.min.js" />
+    <Compile Include="public\assets\js\highcharts.js" />
+    <Compile Include="public\assets\js\highcharts.src.js" />
+    <Compile Include="public\assets\js\highmaps.js" />
+    <Compile Include="public\assets\js\highmaps.src.js" />
+    <Compile Include="public\assets\js\iot-application.js" />
+    <Compile Include="public\assets\js\iot-device.js" />
+    <Compile Include="public\assets\js\jquery-1.11.3.min.js" />
+    <Compile Include="public\assets\js\jquery.minicolors.min.js" />
+    <Compile Include="public\assets\js\json-formatter.min.js" />
+    <Compile Include="public\assets\js\modules\canvas-tools.js" />
+    <Compile Include="public\assets\js\modules\canvas-tools.src.js" />
+    <Compile Include="public\assets\js\modules\data.js" />
+    <Compile Include="public\assets\js\modules\data.src.js" />
+    <Compile Include="public\assets\js\modules\drilldown.js" />
+    <Compile Include="public\assets\js\modules\drilldown.src.js" />
+    <Compile Include="public\assets\js\modules\exporting.js" />
+    <Compile Include="public\assets\js\modules\exporting.src.js" />
+    <Compile Include="public\assets\js\modules\heatmap.js" />
+    <Compile Include="public\assets\js\modules\heatmap.src.js" />
+    <Compile Include="public\assets\js\modules\map.js" />
+    <Compile Include="public\assets\js\modules\map.src.js" />
+    <Compile Include="public\assets\js\modules\solid-gauge.js" />
+    <Compile Include="public\assets\js\modules\solid-gauge.src.js" />
+    <Compile Include="public\assets\js\modules\treemap.js" />
+    <Compile Include="public\assets\js\modules\treemap.src.js" />
+    <Compile Include="public\assets\js\moment-with-locales.min.js" />
+    <Compile Include="public\assets\js\mqttws31.js" />
+    <Compile Include="public\assets\js\mqttws31_iotf.js" />
+    <Compile Include="public\assets\js\ng-device-detector.min.js" />
+    <Compile Include="public\assets\js\npm.js" />
+    <Compile Include="public\assets\js\ocLazyLoad.min.js" />
+    <Compile Include="public\assets\js\qrcode.js" />
+    <Compile Include="public\assets\js\re-tree.min.js" />
+    <Compile Include="public\assets\js\roundProgress.min.js" />
+    <Compile Include="public\assets\js\select.min.js" />
+    <Compile Include="public\assets\js\themes\dark-blue.js" />
+    <Compile Include="public\assets\js\themes\dark-green.js" />
+    <Compile Include="public\assets\js\themes\dark-noto.js" />
+    <Compile Include="public\assets\js\themes\dark-unica.js" />
+    <Compile Include="public\assets\js\themes\dark-unica2.js" />
+    <Compile Include="public\assets\js\themes\gray.js" />
+    <Compile Include="public\assets\js\themes\grid-light.js" />
+    <Compile Include="public\assets\js\themes\grid.js" />
+    <Compile Include="public\assets\js\themes\sand-signika.js" />
+    <Compile Include="public\assets\js\themes\skies.js" />
+    <Compile Include="public\assets\js\three.min.js" />
+    <Compile Include="public\assets\js\ui-bootstrap-tpls-0.13.0.min.js" />
+    <Compile Include="public\assets\js\uuid.js" />
+    <Compile Include="public\controllers\mqtt_web_client_ctrl.js" />
+    <Compile Include="public\services\app_config.js" />
+    <Compile Include="server.js" />
+    <Compile Include="server\config\srvConfig.js" />
+    <Content Include="package.json" />
+    <Content Include="public\assets\css\angular-ui-notification.min.css" />
+    <Content Include="public\assets\css\bootstrap-theme.css" />
+    <Content Include="public\assets\css\bootstrap-theme.css.map" />
+    <Content Include="public\assets\css\bootstrap-theme.min.css" />
+    <Content Include="public\assets\css\bootstrap.css" />
+    <Content Include="public\assets\css\bootstrap.css.map" />
+    <Content Include="public\assets\css\bootstrap.darkly.css" />
+    <Content Include="public\assets\css\bootstrap.darkly.min.css" />
+    <Content Include="public\assets\css\bootstrap.min.css" />
+    <Content Include="public\assets\css\bootstrap.sandstone.min.css" />
+    <Content Include="public\assets\css\bootstrap.simplex.css" />
+    <Content Include="public\assets\css\bootstrap.united.css" />
+    <Content Include="public\assets\css\bootstrap.yeti.css" />
+    <Content Include="public\assets\css\bootstrap.yeti.min.css" />
+    <Content Include="public\assets\css\font-awesome.css" />
+    <Content Include="public\assets\css\font-awesome.min.css" />
+    <Content Include="public\assets\css\jquery.minicolors.css" />
+    <Content Include="public\assets\css\json-formatter.min.css" />
+    <Content Include="public\assets\css\notosan-font.css" />
+    <Content Include="public\assets\css\select.min.css" />
+    <Content Include="public\assets\css\sticky-footer.css" />
+    <Content Include="public\assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="public\assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="public\assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="public\assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="public\assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="public\assets\fonts\FontAwesome.otf" />
+    <Content Include="public\assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="public\assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="public\assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="public\assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="public\assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="public\assets\fonts\NotoSansTC-Light.otf" />
+    <Content Include="public\assets\fonts\NotoSansTC-Regular.otf" />
+    <Content Include="public\assets\imgs\facebooknotifications.jpg" />
+    <Content Include="public\assets\imgs\favicon-code-fork.ico" />
+    <Content Include="public\assets\imgs\inbox_stackoverflow.png" />
+    <Content Include="public\assets\imgs\Internet_of_Things.jpg" />
+    <Content Include="public\assets\imgs\IoT-Graphic.png" />
+    <Content Include="public\assets\imgs\mqtt-scenario.png" />
+    <Content Include="public\assets\imgs\NotificationFacebook.jpg" />
+    <Content Include="public\assets\imgs\notify.mp3" />
+    <Content Include="public\assets\imgs\notify.ogg" />
+    <Content Include="public\assets\imgs\notify.wav" />
+    <Content Include="public\assets\imgs\Protocols-Related-to-Internet-of-Things-IoT.png" />
+    <Content Include="public\assets\imgs\realtime_progressbar.png" />
+    <Content Include="public\assets\imgs\things-connected.png" />
+    <Content Include="public\index.html" />
+    <Content Include="public\partials\home.html" />
+    <Content Include="public\partials\mqtt_web_client.html" />
+    <Content Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="public\" />
+    <Folder Include="public\assets\" />
+    <Folder Include="public\assets\css\" />
+    <Folder Include="public\assets\fonts\" />
+    <Folder Include="public\assets\imgs\" />
+    <Folder Include="public\assets\js\" />
+    <Folder Include="public\assets\js\adapters\" />
+    <Folder Include="public\assets\js\modules\" />
+    <Folder Include="public\assets\js\themes\" />
+    <Folder Include="public\controllers\" />
+    <Folder Include="public\partials\" />
+    <Folder Include="public\presentation\" />
+    <Folder Include="public\presentation\2015-realtime-webapp-meetup\" />
+    <Folder Include="public\services\" />
+    <Folder Include="server\" />
+    <Folder Include="server\config\" />
+  </ItemGroup>
+  <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,16 @@
+{
+  "name": "RealtimeWebMqtt",
+  "version": "0.0.0",
+  "description": "RealtimeWebMqtt",
+  "main": "server.js",
+  "author": {
+    "name": "8703147",
+    "email": ""
+  },
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3",
+    "in-array": "^0.1.0",
+    "redis": "^0.12.1"
+  }
+}

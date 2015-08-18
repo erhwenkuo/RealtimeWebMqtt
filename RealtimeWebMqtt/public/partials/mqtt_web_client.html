@@ -1,0 +1,276 @@
+﻿<!--Partials/mqtt_web_client.html-->
+
+<!--Notification Directive-->
+<toasty-container toasty-defaults='{"timeout": 3000, "close-button":true}'></toasty-container>
+
+<div class="container">
+    <div>
+        <div class="row">
+            <h1>MQTT Web Client</h1>
+            <p class="lead">A simple MQTT web client for test, debug and monitoring</p>
+        </div>
+
+        <!--MQTT web client connection buttons-->
+        <div class="row">
+            <button class="btn btn-default" ng-click="isMqttConnection_Collapsed = !isMqttConnection_Collapsed">Connection <i class="fa fa-angle-double-up" ng-show="isMqttConnection_Collapsed"></i><i class="fa fa-angle-double-down" ng-show="!isMqttConnection_Collapsed"></i></button>
+            <span class="text-success" ng-show="isConnected"><i class="fa fa-check"></i> Connected</span>
+            <span class="text-danger" ng-show="!isConnected"><i class="fa fa-close"></i> Disconnected</span>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="isNotificationEnabled"> Enable Notification
+                </label>
+            </div>
+        </div>
+
+        <p></p>
+
+        <!--MQTT web client connection configuration form-->
+        <div class="row">
+            <div collapse="isMqttConnection_Collapsed">
+                <div class="well">
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <legend>Connection</legend>
+                            <div class="form-group">
+                                <label for="inputMqttHost" class="col-lg-2 control-label">Host</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" id="inputMqttHost" placeholder="MQTT Host" ng-model="mqtt_conn.host" ng-disabled="isConnected">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputMqttPort" class="col-lg-2 control-label">Port</label>
+                                <div class="col-lg-10">
+                                    <input type="number" class="form-control" id="inputMqttPort" placeholder="MQTT Websocket Port" ng-model="mqtt_conn.port" ng-disabled="isConnected">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputMqttClientId" class="col-lg-2 control-label">ClientId</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" id="inputMqttClientId" placeholder="ClientId" ng-model="mqtt_conn.clientid" ng-disabled="isConnected">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputMqttUserId" class="col-lg-2 control-label">UserId</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" id="inputMqttUserId" placeholder="UserId" ng-model="mqtt_conn.userid" ng-disabled="isConnected">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputMqttPassword" class="col-lg-2 control-label">Password</label>
+                                <div class="col-lg-10">
+                                    <input type="password" class="form-control" id="inputMqttPassword" placeholder="Password" ng-model="mqtt_conn.password" ng-disabled="isConnected">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputKeepAlive" class="col-lg-2 control-label">Keep Alive</label>
+                                <div class="col-lg-10">
+                                    <input type="number" class="form-control" id="inputKeepAlive" placeholder="Keep alive in seconds" ng-model="mqtt_conn.keep_alive" ng-disabled="isConnected">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputCleanSession" class="col-lg-2 control-label">Clean Session</label>
+                                <div class="col-lg-10">
+                                    <p></p>
+                                    <input type="checkbox" ng-model="mqtt_conn.clean_session" ng-disabled="isConnected">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputLastWillTopic" class="col-lg-2 control-label">Last-Will Topic</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" id="inputLastWillTopic" placeholder="Last-Will Topic" ng-model="mqtt_conn.lastwill_topic" ng-disabled="isConnected">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputLastWillQos" class="col-lg-2 control-label">Last-Will QoS</label>
+                                <div class="col-lg-10">
+                                    <select class="form-control" id="inputLastWillQos" placeholder="QoS" ng-model="mqtt_conn.lastwill_qos" ng-disabled="isConnected">
+                                        <option>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputLastWillMsg" class="col-lg-2 control-label">Last-Will Message</label>
+                                <div class="col-lg-10">
+                                    <textarea class="form-control" rows="2" id="inputLastWillMsg" ng-model="mqtt_conn.lastwill_message" ng-disabled="isConnected"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputLastWillRetain" class="col-lg-2 control-label">Last-Will Retain</label>
+                                <p></p>
+                                <div class="col-lg-10">
+                                    <input type="checkbox" ng-model="mqtt_conn.lastwill_retain" ng-disabled="isConnected">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <button type="button" class="btn btn-info" ng-click="connect()" ng-show="!isConnected"><i class="fa fa-chain"></i> Connect</button>
+                                    <button type="button" class="btn btn-primary" ng-click="disconnect()" ng-show="isConnected"><i class="fa fa-chain-broken"></i> Disconnect</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <p></p>
+
+        <!--MQTT web client message publish-->
+        <div class="row">
+            <button class="btn btn-default" ng-click="isMqttPublish_Collapsed = !isMqttPublish_Collapsed">Publish <i class="fa fa-angle-double-up" ng-show="isMqttPublish_Collapsed"></i><i class="fa fa-angle-double-down" ng-show="!isMqttPublish_Collapsed"></i></button>           
+        </div>
+
+        <p></p>       
+
+        <!--MQTT web client message message publish form-->
+        <div class="row">            
+            <div collapse="isMqttPublish_Collapsed">
+                <div class="well">
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <legend>Publish</legend>
+                            <div class="form-group">
+                                <label for="inputPublishTopic" class="col-lg-2 control-label">Topic</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" id="inputPublishTopic" ng-model="mqtt_publish.topic">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPublishQos" class="col-lg-2 control-label">QoS</label>
+                                <div class="col-lg-10">
+                                    <select class="form-control" id="inputPublishQos" placeholder="QoS" ng-model="mqtt_publish.qos">
+                                        <option>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPublishRetain" class="col-lg-2 control-label">Retain</label>
+                                <p></p>
+                                <div class="col-lg-10">
+                                    <input type="checkbox" ng-model="mqtt_publish.retain">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputPublishMsg" class="col-lg-2 control-label">Message</label>
+                                <div class="col-lg-10">
+                                    <textarea class="form-control" rows="4" id="inputPublishMsg" ng-model="mqtt_publish.message"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <button type="button" class="btn btn-info" ng-click="publish()"><i class="fa fa-envelope"></i> Publish</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>            
+        </div>
+
+        <p></p>
+
+        <!--MQTT web client message subscribe buttons-->
+        <div class="row">            
+            <button class="btn btn-default" ng-click="isMqttSubscribe_Collapsed = !isMqttSubscribe_Collapsed">Subscribe <i class="fa fa-angle-double-up" ng-show="isMqttSubscribe_Collapsed"></i><i class="fa fa-angle-double-down" ng-show="!isMqttSubscribe_Collapsed"></i></button>
+        </div>
+        <p></p>
+
+        <!--MQTT web client message topic subscription form-->
+        <div class="row">
+            <div collapse="isMqttSubscribe_Collapsed">
+                <div class="well">
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <legend>Subscription</legend>
+                            <div class="form-group">
+                                <label for="inputtSubscriptionTopic" class="col-lg-2 control-label">Topic</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" id="inputtSubscriptionTopic" ng-model="mqtt_subscription.topic">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputSubscriptionQos" class="col-lg-2 control-label">QoS</label>
+                                <div class="col-lg-10">
+                                    <select class="form-control" id="inputSubscriptionQos" placeholder="QoS" ng-model="mqtt_subscription.qos">
+                                        <option>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <button type="button" class="btn btn-info" ng-click="subscribe()"><i class="fa fa-check-square-o"></i> Subscribe</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!--MQTT web client message topic subscription list-->
+        <div class="row">
+            <div collapse="isMqttSubscribe_Collapsed">
+                <!--Topic Subscriptio List-->
+                <div class="row">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="subscription in subscriptions">
+                            <span class="badge" style="background: {{subscription.color}}"><i class="fa fa-spinner fa-spin"></i> Qos:{{subscription.qos}} <i class="fa fa-remove" ng-click="unsubscribe($index)"></i></span>
+                            <h5 class="list-group-item-heading">{{subscription.topic}}</h5>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--MQTT incoming messages list-->
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Messages</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <form class="form-inline">
+                    <div class="form-group form-group-sm">
+                        <label for="inputMessageLimit">Messages Limit</label>
+                        <input type="number" class="form-control" id="inputMessageLimit" ng-model="mqtt_message.size">
+                        <button class="btn btn-success" ng-click="limitMessages()"><i class="fa fa-gear"></i> Set Limit</button>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success" ng-click="clearMessages()"><i class="fa fa-trash"></i> Clear</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <p/>
+
+        <div class="row">
+            <div class="list-group">
+                <div class="list-group-item" ng-repeat="message in messages">
+                    <div class="row">
+                        <div class="col-xs-4"><i class="fa fa-clock-o"></i> {{message.timestamp}}</div>
+                        <div class="col-xs-4"><i class="fa fa-rss"></i> Topic: {{message.topic}}</div>
+                        <div class="col-xs-4"><i class="fa fa-tag"></i> Qos: {{message.qos}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-11">
+                            <h5>{{message.payload}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
