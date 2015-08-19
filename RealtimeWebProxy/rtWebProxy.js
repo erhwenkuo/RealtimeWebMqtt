@@ -23,7 +23,7 @@ var server = require('http').createServer(function (req, res) {
 // in this demo, we route websocket request to mosquitto (mqtt broker)
 server.on('upgrade', function (req, res) {
     proxy.ws(req, res, {
-        target: appConfig.options['ws']
+        target: appConfig.options['mqtt']
     }, function (e) {
         log_error(e, req);
     });

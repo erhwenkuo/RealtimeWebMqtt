@@ -1,0 +1,72 @@
+﻿<!--partials/iot_smartphone_viewer.html-->
+<div class="container">
+    <div>
+        <div class="row">
+            <h1>witlab IoT Demo</h1>
+            <p>查看您手機的感應器的即時視覺化</p>
+            <p></p>
+            <p>您需要一支智慧型手機及一台有大螢幕的裝置。</p>
+        </div>
+
+        <div class="row">
+            <button class="btn btn-info" ng-click="connect()" ng-show="!isConnected">Connect</button>
+            <button class="btn btn-primary" ng-click="disconnect()" ng-show="isConnected">Disconnect</button>
+            <span class="text-success" ng-show="isConnected && isMobileDevice"><i class="fa fa-check"></i> Connected</span>
+        </div>
+
+        <toasty-container toasty-defaults='{"timeout": 3000, "close-button":true}'></toasty-container>
+
+        <div class="row">
+            <p class="text-muted">使用手機來掃描以下的QR code就可以跳轉到smartphone collector的網頁</p>
+            <qr text="smartphone_collector_url" size="150"></qr>
+        </div>
+
+        <!--只有在connected之後才會秀出來的Smartphone List的列表-->
+        <div class="row" ng-show="isConnected">
+            <div collapse="isSmartphoneList_Collapsed">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Smartphones</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group" ng-repeat="smartphone_presence in smartphones_list">
+                            <div class="list-group-item">
+                                <h5 class="list-group-item-heading"><i class="fa fa-2x fa-mobile-phone" ng-class="{'online': 'text-success', 'offline': 'text-muted'}[smartphone_presence.d.status]"></i> - [{{smartphone_presence.deviceOwner}} : {{smartphone_presence.deviceId}}]</h5>
+                                <div class="row">
+                                    <span class="col-md-3 text-warning"><i class="fa fa-2x fa-desktop" ng-show="smartphone_presence.screenControlled"></i></span>
+                                    <span class="col-md-3">Organization : {{smartphone_presence.d.org}}</span>
+                                    <span class="col-md-3">Status: <span class="label" ng-class="{'online': 'label-success', 'offline': 'label-danger'}[smartphone_presence.d.status]">{{smartphone_presence.d.status}}</span></span>
+                                    <span class="col-md-3"><a href="" ng-click="controlScreen(smartphone_presence.d.id)" tooltip-placement="bottom" tooltip="行動裝置視覺化" ng-show="!smartphone_presence.screenControlled"><i class="fa fa-play"></i> Play</a><a href="" ng-click="releaseControlScreen(smartphone_presence.d.id)" tooltip-placement="bottom" tooltip="取消視覺化" ng-show="smartphone_presence.screenControlled"><i class="fa fa-stop"></i> Stop</a></span>
+                                </div>
+                                <div class="row">
+                                    <span class="label label-danger" ng-show="smartphone_presence.excessiveVibrationDetected">手機晃的很厲害喔!!</span>
+                                </div>
+                                <br />
+                                <p>Orientation:</p>
+                                <div class="row">
+                                    <div class="col-xs-4 col-md-4"><strong>Alpha  : </strong> {{smartphone_presence.sensorData.d.oa}}</div>
+                                    <div class="col-xs-4 col-md-4"><strong>Beta   : </strong> {{smartphone_presence.sensorData.d.ob}}</div>
+                                    <div class="col-xs-4 col-md-4"><strong>Gamma  : </strong> {{smartphone_presence.sensorData.d.og}}</div>
+                                </div>
+                                <br />
+                                <p>Motion:</p>
+                                <div class="row">
+                                    <div class="col-xs-4 col-md-4"><strong>Accel X : </strong> {{smartphone_presence.sensorData.d.ax}}</div>
+                                    <div class="col-xs-4 col-md-4"><strong>Accel Y : </strong> {{smartphone_presence.sensorData.d.ay}}</div>
+                                    <div class="col-xs-4 col-md-4"><strong>Accel Z : </strong> {{smartphone_presence.sensorData.d.az}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-footer" ng-show="screenControlledDeviceId">
+                        <div class="row">
+                            <div class="col-md-4 text-success"><i class="fa fa-3x fa-mobile-phone"></i> - [{{screenControlledDeviceId}}]</div>
+                        </div>
+                        <div id="3D_Container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

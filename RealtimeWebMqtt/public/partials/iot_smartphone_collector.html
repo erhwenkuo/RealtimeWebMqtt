@@ -1,0 +1,101 @@
+﻿<!--partials/iot_smartphone_collector.html-->
+<div class="container">
+    <div>
+        <div class="row">
+            <h1>witlab IoT Demo - 手機 Sensor Data Collector</h1>
+            <p>查看您手機的感應器的即時視覺化</p>
+            <p></p>
+            <p>您需要一支智慧型手機及一台有大螢幕的裝置。</p>
+        </div>
+        <toasty-container toasty-defaults='{"timeout": 3000, "close-button":true}'></toasty-container>
+
+        <div class="row">
+            <div class="form-group">
+                <label class="control-label">你是誰?</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-child"></i></span>
+                    <input type="text" class="form-control" ng-model="deviceOwner">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label class="control-label">智慧型手機號碼</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-mobile-phone"></i></span>
+                    <input type="text" class="form-control" ng-model="deviceId">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="connect()" ng-show="!isConnected && isMobileDevice">Connect</button>
+                        <button class="btn btn-default" type="button" ng-click="disconnect()" ng-show="isConnected && isMobileDevice">Disconnect</button>
+                    </span>
+                </div>
+                <span class="text-success" ng-show="isConnected && isMobileDevice"><i class="fa fa-check"></i> Connected</span>
+            </div>
+        </div>
+
+        <div class="row" ng-show="!isMobileDevice">
+            <h3>行動裝置偵測</h3>
+            <p class="text-danger">這個網頁需要配備有移動與重力感測的裝置來使用。請您使用智慧手機的瀏覽器來打開本網頁, 謝謝!!</p>
+        </div>
+
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title text-center">Device Info</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-4 col-md-4 text-center"><strong>OS</strong></div>
+                        <div class="col-xs-4 col-md-4 text-center"><strong>Browser</strong></div>
+                        <div class="col-xs-4 col-md-4 text-center"><strong>Device</strong></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4 col-md-4 text-center">{{os}}</div>
+                        <div class="col-xs-4 col-md-4 text-center">{{browser}}</div>
+                        <div class="col-xs-4 col-md-4 text-center">{{device}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" ng-show="isMobileDevice">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title text-center">Movement</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-4 col-md-4 text-center"><strong>Alpha</strong></div>
+                        <div class="col-xs-4 col-md-4 text-center"><strong>Beta</strong></div>
+                        <div class="col-xs-4 col-md-4 text-center"><strong>Gamma</strong></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4 col-md-4 text-center">{{oa | number : 2}}</div>
+                        <div class="col-xs-4 col-md-4 text-center">{{ob | number : 2}}</div>
+                        <div class="col-xs-4 col-md-4 text-center">{{og | number : 2}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" ng-show="isMobileDevice">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title text-center">Acceleration</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-4 col-md-4 text-center"><strong>X</strong></div>
+                        <div class="col-xs-4 col-md-4 text-center"><strong>Y</strong></div>
+                        <div class="col-xs-4 col-md-4 text-center"><strong>Z</strong></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4 col-md-4 text-center">{{ax | number : 2}}</div>
+                        <div class="col-xs-4 col-md-4 text-center">{{ay | number : 2}}</div>
+                        <div class="col-xs-4 col-md-4 text-center">{{az | number : 2}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

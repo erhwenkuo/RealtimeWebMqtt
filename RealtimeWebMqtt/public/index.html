@@ -41,13 +41,10 @@
                             <li class="dropdown-header">Web Application</li>
                             <li><a ui-sref="mqtt_web_whoisonline">Who is online</a></li>
                             <li><a ui-sref="mqtt_web_inboxnotification">Inbox and notification</a></li>
-                            <li><a ui-sref="demo-mqtt-jobprogress">Realtime job progress</a></li>
-                            <li class="divider"></li>
-                            <li class="dropdown-header">IT Admin</li>
-                            <li><a ui-sref="demo-mqtt-sysinfo">IoT device monitor and control</a></li>
                             <li class="divider"></li>
                             <li class="dropdown-header">Special</li>
-                            <li><a href="/apps/iot/#/apps/iot/iot_smartphone_viewer">Mobile device sensor data</a></li>
+                            <li><a ui-sref="iot_smartphone_viewer">Mobile device sensor data viewer</a></li>
+                            <li><a ui-sref="iot_smartphone_viewer">Mobile device sensor data collector</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -86,13 +83,26 @@
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/ui-bootstrap-tpls-0.13.0.min.js"></script>
     
-    <script src="assets/js/mqttws31.js"></script> <!--處理Mqtt Broker的連接-->
-    <script src="assets/js/moment-with-locales.min.js"></script> <!--處理日期相關的轉換-->
+    <script src="assets/js/mqttws31.js"></script> <!--handle Mqtt Broker connection-->
+    <script src="assets/js/moment-with-locales.min.js"></script> <!--handle Date/Time object conversion-->
+
+    <script src="assets/js/qrcode.js"></script> <!--Qr code generator-->
+    <script src="assets/js/angular-qr.min.js"></script><!--Qr code (angular directive)-->
+    <script src="assets/js/re-tree.min.js"></script><!--angular module to detect device-->
+    <script src="assets/js/ng-device-detector.min.js"></script> <!--angular module to detect device-->
+    <script src="assets/js/three.min.js"></script><!-- libary to generate 3D object -->
 
     <script src="app.js"></script>
     <script src="services/app_config.js"></script>
+
+    <script src="assets/js/iot-device.js"></script> <!--witlab IoT SDK (deviceClient)-->
+    <script src="assets/js/iot-application.js"></script><!--witlab IoT SDK (applicationClient)-->
+
     <script src="controllers/mqtt_web_client_ctrl.js"></script>
     <script src="controllers/mqtt_web_whoisonline_ctrl.js"></script>
     <script src="controllers/mqtt_web_inboxnotification_ctrl.js"></script>
+    <script src="controllers/iot_smartphone_viewer_ctrl.js"></script>
+    <script src="controllers/iot_smartphone_collector_ctrl.js"></script>
+
 </body>
 </html>

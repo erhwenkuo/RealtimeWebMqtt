@@ -92,6 +92,8 @@
     <Compile Include="public\assets\js\three.min.js" />
     <Compile Include="public\assets\js\ui-bootstrap-tpls-0.13.0.min.js" />
     <Compile Include="public\assets\js\uuid.js" />
+    <Compile Include="public\controllers\iot_smartphone_collector_ctrl.js" />
+    <Compile Include="public\controllers\iot_smartphone_viewer_ctrl.js" />
     <Compile Include="public\controllers\mqtt_web_client_ctrl.js" />
     <Compile Include="public\controllers\mqtt_web_inboxnotification_ctrl.js" />
     <Compile Include="public\controllers\mqtt_web_whoisonline_ctrl.js" />
@@ -151,6 +153,8 @@
     <Content Include="public\assets\imgs\things-connected.png" />
     <Content Include="public\index.html" />
     <Content Include="public\partials\home.html" />
+    <Content Include="public\partials\iot_smartphone_collector.html" />
+    <Content Include="public\partials\iot_smartphone_viewer.html" />
     <Content Include="public\partials\mqtt_web_client.html" />
     <Content Include="public\partials\mqtt_web_inboxnotification.html" />
     <Content Include="public\partials\mqtt_web_whoisonline.html" />
