@@ -22,7 +22,6 @@ mqtt_client.on('connect', function () {
     // subscribe INBOX & NOTIFICATION topic  & UNREAD_INBOX_NOTIFICATION
     mqtt_client.subscribe(inbox_topic, { qos: 0 });
     mqtt_client.subscribe(notification_topic, { qos: 0 });
-    mqtt_client.subscribe("test", { qos: 0 });
 });
 
 // ** listen to event which is triggered when "inbox" or "notification" message is received
@@ -53,9 +52,9 @@ mqtt_client.on('error', function (err) {
 
 // event which is triggered when mqtt connection is closed
 mqtt_client.on('close', function () {
-    console.log(client_Id + " disconected");
+    console.log(appConfig.mqtt.clientId + " disconected");
 });
 
 console.log("================================================");
-console.log("# rtInboxHandler console app is running ... #");
+console.log("#    rtInboxHandler console app is running     #");
 console.log("================================================");
