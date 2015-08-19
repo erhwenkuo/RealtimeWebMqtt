@@ -1,0 +1,210 @@
+﻿<!--partials/mqtt_web_inboxnotification.html-->
+<div class="container">
+    <div>
+        <div class="row">
+            <h1>MQTT User-Inbox</h1>
+            <p class="lead">A simple MQTT application which demonstrate how to implements "user inbox" feature</p>
+            <p>When someone sign-in to Web or App, system will continue notify user if they have new unread message/notification in their inbox.</p>
+            <p>This kind of push-like notification implementation could lead to better user experience and improve server performance as well.</p>
+            <p>This is a integration demo which utilize MQTT broker, RESTful api on web server, Redis and special console progarm which handle below tasks:</p>
+            <ul>
+                <li>Subscribe all users' inbox and notification topics</li>
+                <li>Store these inbox and notification messages into Redis queue</li>
+                <li>Increase unread inbox and notification message counters in Redis</li>
+                <li>Publish unread inbox and notification counter messages to each users</li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <button class="btn btn-info" ng-click="login()" ng-show="!isLogined">Login</button>
+            <button class="btn btn-primary" ng-click="disconnect()" ng-show="isLogined">Logout</button>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="isNotificationEnabled"> Enable Notification
+                </label>
+            </div>
+        </div>
+
+        <!--a demonstration NavgationBar-->
+        <div class="row">
+            <!--NavBar-->
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="">Demo App</a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="" ng-click="show_messages('inbox')"><i class="fa fa-2x fa-inbox"></i><span class="badge" ng-show="mqtt_whoisonline.unread_inbox>0">{{mqtt_whoisonline.unread_inbox}}</span></a></li>
+                            <li><a href="" ng-click="show_messages('notification')"><i class="fa fa-2x fa-comments-o"></i><span class="badge" ng-show="mqtt_whoisonline.unread_notification>0">{{mqtt_whoisonline.unread_notification}}</span></a></li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li ng-show="isLogined"><a href="#"><i class="fa fa-male"></i> {{mqtt_whoisonline.username}}</a></li>
+                            <li ng-show="!isLogined"><a href="" ng-click="login()">Login</a></li>
+                            <li ng-show="isLogined"><a href="" ng-click="disconnect()">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!--Nabbar-->
+        </div>
+
+        <!--who-is-oneline user presence list-->
+        <div class="row" ng-show="isLogined">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Oneline users</h3>
+                </div>
+                <div class="panel-body">
+                    <a href="" class="label" ng-class="{'Available': 'label-success', 'Busy': 'label-danger', 'Away':'label-warning'}[mqtt_whoisonline.userstatus]" ng-click="change_status()"><i class="fa fa-gear"></i></a> {{mqtt_whoisonline.username}} - {{mqtt_whoisonline.userstatus}}
+                    <p></p>
+                    <i class="fa fa-users"></i>  Other Online Users
+                    <div class="list-group" ng-repeat="(key, value) in mqtt_online_users">
+                        <a class="list-group-item" ng-click="send_message(key)">
+                            <h5 class="list-group-item-heading"><label ng-class="{'Available': 'label-success', 'Busy': 'label-danger', 'Away':'label-warning'}[value.presence.status]" class="label">&nbsp;</label> {{key}}</h5>
+                            <div class="row">
+                                <span class="col-md-6">Status: {{value.presence.status}}</span>
+                                <span class="col-md-6"><i class="fa fa-clock-o"></i> Online Since: {{value.presence.connectionTime | date:'yyyy-MM-dd H:mm'}}</span>
+                            </div>
+                            <p></p>
+                            <div class="row" ng-show="value.lastmsg">
+                                <span class="col-md-6">Last Message: {{value.lastmsg.message}}</span>
+                                <span class="col-md-6"><i class="fa fa-clock-o"></i> Messaging @ {{value.lastmsg.messagingTime | date:'yyyy-MM-dd H:mm'}}</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--a audio for inbox/notification-->
+<audio id="notifyAudio">
+    <source src="assets/imgs/notify.mp3" type="audio/mpeg" />
+</audio>
+
+<!--a popout window for user login-->
+<script type="text/ng-template" id="mqtt_web_inboxnotification_login.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Personal Profile</h3>
+    </div>
+    <div class="modal-body">
+
+        <div class="form-group">
+            <label class="control-label" for="inputDefault">User name</label>
+            <input type="text" class="form-control" id="inputDefault" ng-model="mqtt_whoisonline.username">
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-info" ng-click="ok()">OK</button>
+        <button class="btn btn-primary" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+
+<!--a popout window for allow user change status-->
+<script type="text/ng-template" id="mqtt_web_inboxnotification_userstatus_change.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Change Status</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="select" class="control-label">Status</label>
+                <div>
+                    <select class="form-control" id="select" ng-model="userstatus">
+                        <option>Available</option>
+                        <option>Busy</option>
+                        <option>Away</option>
+                    </select>
+                </div>
+            </div>
+
+            <label class="label" ng-class="{'Available': 'label-success', 'Busy': 'label-danger', 'Away':'label-warning'}[userstatus]">&nbsp;</label>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-info" ng-click="ok()">OK</button>
+        <button class="btn btn-primary" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+
+<!--a popout window for allow user send message to other user-->
+<script type="text/ng-template" id="mqtt_web_inboxnotification_senduser_message.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Messaging</h3>
+        <i class="fa fa-user"></i> {{user_to}}
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="control-label">Message Types</label>
+            <div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="chat" ng-model="msg_type" ng-checked="true" />
+                        Chat
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="inbox" ng-model="msg_type" />
+                        Inbox
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios3" value="notification" ng-model="msg_type" />
+                        Notification
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="inputDefault">Message Content</label>
+            <textarea class="form-control" id="inputDefault" ng-model="message_to" />
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-info" ng-click="ok()">OK</button>
+        <button class="btn btn-primary" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+
+<!--a popout window for allow user view unread inbox/notification from other user-->
+<script type="text/ng-template" id="mqtt_web_inboxnotification_showmessages.html">
+    <div class="modal-header">
+        <h3 class="modal-title"><i class="fa " ng-class="{'inbox': 'fa-inbox', 'notification': 'fa-comments-o'}[message_type]"></i> {{message_type}}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="list-group" ng-repeat="message in messages">
+            <a href="#" class="list-group-item">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="list-group-item-heading"><i class="fa fa-child"></i> {{message.user_from}}</h6>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="list-group-item-heading"><i class="fa fa-clock-o"></i> {{message.messagingTime | date:'yyyy-MM-dd H:mm'}}</h6>
+                    </div>
+                </div>
+                <p class="list-group-item-text"><h6>{{message.message}}</h6></p>
+            </a>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-info" ng-click="ok()">OK</button>
+        <button class="btn btn-primary" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

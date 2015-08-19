@@ -1,39 +1,31 @@
 ﻿var srvConfig = {};
 
-var server_env = 'aws';
+// define which tcp port this service bind to
+srvConfig.servicePort = 1337;
 
-if (server_env == 'aws') {   
-    // Redis connection info
-    srvConfig.redis = {};
-    srvConfig.redis.host = 'localhost';
-    srvConfig.redis.port = 6379;
+// config Redis connection info
+srvConfig.redis = {};
+srvConfig.redis.host = '52.69.150.31';
+srvConfig.redis.port = 6379;
 
-    // IoT Mqtt Connection info
-    srvConfig.mqttBrokerUrl = 'localhost';
-    srvConfig.mqttBrokerPort = 1883;
-    srvConfig.mqttConnUsername = "";
-    srvConfig.mqttConnPassword = "";
-    srvConfig.org = "witlab";
-    srvConfig.type = "websrv";
-    srvConfig.id = "witlab-001";
-    srvConfig.presence = true;
-}
-else {
-    srvConfig.elasticsearch = {};
-    // Redis connection info
-    srvConfig.redis = {};
-    srvConfig.redis.host = '10.34.217.173';
-    srvConfig.redis.port = 6379;
+// config Mqtt Connection info
+srvConfig.mqtt = {};
+srvConfig.mqtt.host = '52.69.150.31';
+srvConfig.mqtt.port = 1883;
+srvConfig.mqtt.keepalive = 10;
+srvConfig.mqtt.clientId = 'rtWebServer_' + Math.random().toString(16).substr(2, 8);
+srvConfig.mqtt.clean = true;
+srvConfig.mqtt.reconnectPeriod = 1000;
+srvConfig.mqtt.connectTimeout = 30 * 1000;
+srvConfig.mqtt.will = {
+    topic: 'WillMsg',
+        payload: 'Connection Closed abnormally..!',
+        qos: 0,
+        retain: false
+    };
+srvConfig.mqtt.username = '';
+srvConfig.mqtt.password = '';
+srvConfig.mqtt.rejectUnauthorized = false;
 
-    // IoT Mqtt Connection info
-    srvConfig.mqttBrokerUrl = '10.34.217.173';
-    srvConfig.mqttBrokerPort = 1883;
-    srvConfig.mqttConnUsername = "";
-    srvConfig.mqttConnPassword = "";
-    srvConfig.org = "witlab";
-    srvConfig.type = "websrv";
-    srvConfig.id = "witlab-001";
-    srvConfig.presence = true;
-}
 
 module.exports = srvConfig;

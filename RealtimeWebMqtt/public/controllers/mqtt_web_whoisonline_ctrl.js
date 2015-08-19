@@ -14,13 +14,12 @@ web_app.controller('mqtt_web_whoisonline_ctrl', function ($scope, $http, $state,
     // reset if user logged out
     var reset = function () {
         $scope.mqtt_client = {};
-        $scope.isLogined = false; //是否己經login進Mqtt broker
-        $scope.isNotificationEnabled = false; //是否要秀出incoming的Mqtt Message
+        $scope.isLogined = false; 
+        $scope.isNotificationEnabled = false; 
         
         $scope.mqtt_whoisonline = {};
         $scope.mqtt_whoisonline.username = "";
-        $scope.mqtt_whoisonline.userstatus = "Available";
-        
+        $scope.mqtt_whoisonline.userstatus = "Available";        
         $scope.mqtt_online_users = {};
     }    
     
@@ -92,15 +91,14 @@ web_app.controller('mqtt_web_whoisonline_ctrl', function ($scope, $http, $state,
         
         modalInstance.result.then(function (result) {
             var topic = "demo/whoisonline/" + result.user_to + "/chat";
-            // 產生"Paho.MQTT"的訊息
-            
+            // construct a object for chat            
             var messaging_obj = {
                 user_from: $scope.mqtt_whoisonline.username,
                 message: result.message_to,
                 messagingTime: new Date().getTime()
             };
             
-            var user_message = new Paho.MQTT.Message(JSON.stringify(messaging_obj)); //把物件轉成JSON
+            var user_message = new Paho.MQTT.Message(JSON.stringify(messaging_obj)); //convert object to JSON string
             user_message.destinationName = topic;
             user_message.qos = 0;
             user_message.retained = false;
@@ -232,8 +230,7 @@ web_app.controller('mqtt_web_whoisonline_ctrl', function ($scope, $http, $state,
             console.log("onConnectionLost: " + responseObject.errorMessage);
         }        
         Notification.error({ title: "Mqtt Connection lost", message: responseObject.errorMessage });        
-        reset();
-        
+        reset();        
     }
     
     // ***callback function used by MQTT client, this function will be called when 
@@ -263,8 +260,8 @@ web_app.controller('mqtt_web_whoisonline_ctrl', function ($scope, $http, $state,
         // use regular expression to detect "presence" message
         var regex = "demo/whoisonline/(.+)/presence";
         var found = topic.match(regex);
-        if (found) { 
-            //檢查是不是同一個使用者
+        if (found) { // this is "Presence" message
+
             var user = found[1]; //get the "userid" from regular expression matching 
             
             if (user == $scope.mqtt_whoisonline.username) {

@@ -1,0 +1,14 @@
+{
+  "name": "RealtimeInboxHandler",
+  "version": "0.0.0",
+  "description": "RealtimeInboxHandler",
+  "main": "rtInboxHandler.js.js",
+  "author": {
+    "name": "8703147",
+    "email": ""
+  },
+  "dependencies": {
+    "mqtt": "^1.3.5",
+    "redis": "^0.12.1"
+  }
+}

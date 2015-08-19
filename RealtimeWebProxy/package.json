@@ -2,7 +2,7 @@
   "name": "RealtimeWebProxy",
   "version": "0.0.0",
   "description": "RealtimeWebProxy",
-  "main": "webproxy.js",
+  "main": "rtWebProxy.js",
   "author": {
     "name": "8703147",
     "email": ""

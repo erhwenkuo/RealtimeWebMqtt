@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <!--只有在login之後才會秀出來的who-is-oneline的列表-->
+        <!--who-is-oneline user presence list-->
         <div class="row" ng-show="isLogined">
             <div class="panel panel-info">
                 <div class="panel-heading">
@@ -48,6 +48,7 @@
     </div>
 </div>
 
+<!--a popout window for user login-->
 <script type="text/ng-template" id="mqtt_web_whoisonline_login.html">
     <div class="modal-header">
         <h3 class="modal-title">Personal Profile</h3>
@@ -66,6 +67,7 @@
     </div>
 </script>
 
+<!--a popout window for allow user change status-->
 <script type="text/ng-template" id="mqtt_web_whoisonline_userstatus_change.html">
     <div class="modal-header">
         <h3 class="modal-title">Change Status</h3>
@@ -92,6 +94,7 @@
     </div>
 </script>
 
+<!--a popout window for allow user send message to other user-->
 <script type="text/ng-template" id="mqtt_web_whoisonline_senduser_message.html">
     <div class="modal-header">
         <h3 class="modal-title">Messaging</h3>
