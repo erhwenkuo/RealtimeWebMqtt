@@ -52,5 +52,8 @@ var port = process.env.port || srvConfig.servicePort;
 var server = app.listen(port, function () {
     var host = server.address().address;
     var port = server.address().port;
-    console.log("rtWebServer service is running on port[" + srvConfig.servicePort + "]...");
+    
+    console.log("================================================");
+    console.log("# rtWebServer service is running on port[" + srvConfig.servicePort + "]... #");
+    console.log("================================================");
 })

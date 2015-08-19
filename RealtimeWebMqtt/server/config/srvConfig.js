@@ -5,12 +5,12 @@ srvConfig.servicePort = 1337;
 
 // config Redis connection info
 srvConfig.redis = {};
-srvConfig.redis.host = '52.69.150.31';
+srvConfig.redis.host = 'localhost';
 srvConfig.redis.port = 6379;
 
 // config Mqtt Connection info
 srvConfig.mqtt = {};
-srvConfig.mqtt.host = '52.69.150.31';
+srvConfig.mqtt.host = 'localhost';
 srvConfig.mqtt.port = 1883;
 srvConfig.mqtt.keepalive = 10;
 srvConfig.mqtt.clientId = 'rtWebServer_' + Math.random().toString(16).substr(2, 8);

@@ -13,7 +13,7 @@ var proxy = httpProxy.createProxy({
 // proxy incoming http request forward to backend http server
 var server = require('http').createServer(function (req, res) {
     proxy.web(req, res, {
-        target: options['http']
+        target: appConfig.options['http']
     }, function (e) {
         log_error(e, req);
     });
@@ -23,15 +23,16 @@ var server = require('http').createServer(function (req, res) {
 // in this demo, we route websocket request to mosquitto (mqtt broker)
 server.on('upgrade', function (req, res) {
     proxy.ws(req, res, {
-        target: options['ws']
+        target: appConfig.options['ws']
     }, function (e) {
         log_error(e, req);
     });
 })
 
 server.listen(appConfig.servicePort);
-
-Console.log("rtWebProxy service is running on port[" + appConfig.servicePort + "]...");
+console.log("================================================");
+console.log("# rtWebProxy service is running on port[" + appConfig.servicePort + "]... #");
+console.log("================================================");
 
 function log_error(e, req) {
     if (e) {

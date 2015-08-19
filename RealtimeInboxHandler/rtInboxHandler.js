@@ -55,3 +55,7 @@ mqtt_client.on('error', function (err) {
 mqtt_client.on('close', function () {
     console.log(client_Id + " disconected");
 });
+
+console.log("================================================");
+console.log("# rtInboxHandler console app is running ... #");
+console.log("================================================");
