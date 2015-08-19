@@ -1,11 +1,13 @@
 ﻿<!--partials/iot_smartphone_viewer.html-->
 <div class="container">
-    <div>
+    <div>        
         <div class="row">
-            <h1>witlab IoT Demo</h1>
-            <p>查看您手機的感應器的即時視覺化</p>
-            <p></p>
-            <p>您需要一支智慧型手機及一台有大螢幕的裝置。</p>
+            <h1>MQTT IoT - Mobile Device Sensor Data Viewer</h1>
+            <p class="lead">A simple MQTT application which demonstrate how to visualize Mobile device sensor data</p>
+            <p>A moden mobile device, such as smartphone or pad, is equiped with many different sensors which can help application to identify the context of device owner.</p>
+            <p>The demonstration here is pretty straight forward, one web page (collector) to collect mobile device accleration and motion sensor data and publish to MQTT specific topic.</p>
+            <p>The other web page (viewer) just subscribe all sensor data from different device and allow user to choose which one they want to visualize.</p>
+            <p>There are many cool features of HTML5, this page use three.js library to dynamic generate a moving 3D object according to the sensor data stream.</p>
         </div>
 
         <div class="row">
@@ -17,11 +19,11 @@
         <toasty-container toasty-defaults='{"timeout": 3000, "close-button":true}'></toasty-container>
 
         <div class="row">
-            <p class="text-muted">使用手機來掃描以下的QR code就可以跳轉到smartphone collector的網頁</p>
+            <p class="text-muted">Use your smart phone or pad to scan below QR code</p>
             <qr text="smartphone_collector_url" size="150"></qr>
         </div>
 
-        <!--只有在connected之後才會秀出來的Smartphone List的列表-->
+        <!--connected smart phone or devices list-->
         <div class="row" ng-show="isConnected">
             <div collapse="isSmartphoneList_Collapsed">
                 <div class="panel panel-primary">
