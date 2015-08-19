@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-var web_app = angular.module('web_app', ['ui.router', 'ui.bootstrap', 'ngAnimate', 'ui-notification', 'ja.qr']);
+var web_app = angular.module('web_app', ['ui.router', 'ui.bootstrap', 'ngAnimate', 'ui-notification', 'ja.qr', 'ng.deviceDetector']);
 
 
 web_app.config(function ($stateProvider, $urlRouterProvider) {
