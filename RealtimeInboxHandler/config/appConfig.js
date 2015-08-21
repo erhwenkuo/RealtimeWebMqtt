@@ -2,13 +2,13 @@
 
 // Redis connection info
 appConfig.redis = {};
-appConfig.redis.host = '52.69.150.31';
+appConfig.redis.host = 'localhost';
 appConfig.redis.port = 6379;
 
 // Mqtt Connection info
 appConfig.mqtt = {};
-appConfig.mqtt.host = '52.69.150.31';
-appConfig.mqtt.port = 1883;
+appConfig.mqtt.host = 'localhost'; 
+appConfig.mqtt.port = 1883; //mqtt broker normal tcp connection port
 appConfig.mqtt.keepalive = 10;
 appConfig.mqtt.clientId = 'rtInboxHandler_' + Math.random().toString(16).substr(2, 8);
 appConfig.mqtt.clean = true;

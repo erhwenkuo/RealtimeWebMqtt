@@ -46,7 +46,7 @@ var rest_api_routes = require('./server/routes/rest_api_routes.js')(express, red
 app.use('/api', rest_api_routes);
 
 // use environment param to define service port or use port defined in srvConfig.js
-var port = process.env.port || srvConfig.servicePort;
+var port = srvConfig.servicePort; // process.env.port || 
 
 // Start the Node.js webserver service
 var server = app.listen(port, function () {
@@ -54,6 +54,6 @@ var server = app.listen(port, function () {
     var port = server.address().port;
     
     console.log("================================================");
-    console.log("# rtWebServer service is running on port[" + srvConfig.servicePort + "] #");
+    console.log("# rtWebServer service is running on port[" + port + "] #");
     console.log("================================================");
 })
